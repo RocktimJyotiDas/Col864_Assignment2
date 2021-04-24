@@ -255,7 +255,7 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
         delta = 0
         for i in range(1, 49):
             for j in range(1, 24):
-                if i == 25 or i == 26 and j != 12:
+                if i in [25,26] and j in range(1,12) or i in [25,26] and j in range(13,24):
                     Value_of_states[i,j] = 0
                 if i == 48 and j == 12:
                     continue
