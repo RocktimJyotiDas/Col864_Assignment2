@@ -258,14 +258,15 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
                 if i == 25 or i == 26 and j != 12:
                     Value_of_states[i,j] = 0
                 if i == 48 and j == 12:
-                    break
+                    continue
                 else:
                     v = Value_of_states[i,j]
                     temp = np.zeros(4)
                     temp[0] = Transition_function((i,j), 0, (i+1, j))*(Reward_function((i,j), (i+1,j)) + gamma*Value_of_states[i+1, j]) \
                               + Transition_function((i,j), 0, (i-1, j))*(Reward_function((i,j), (i-1,j)) + gamma*Value_of_states[i-1, j])\
                               + Transition_function((i,j), 0, (i, j+1))*(Reward_function((i,j), (i,j+1)) + gamma*Value_of_states[i, j+1])\
-                              + Transition_function((i,j), 0, (i, j-1))*(Reward_function((i,j), (i,j-1)) + gamma*Value_of_states[i, j-1])
+                              + Transition_function((i,j), 0, (i, j-1))*(Reward_function((i,j), (i,j-1)) + gamma*Value_of_states[i, j-1]) \
+                              + Transition_function((i, j), 0, (i, j)) * (Reward_function((i, j), (i, j)) + gamma * Value_of_states[i, j])
 
                     temp[1] = Transition_function((i, j), 1, (i + 1, j)) * (
                                 Reward_function((i, j), (i + 1, j)) + gamma * Value_of_states[i + 1, j]) \
@@ -274,7 +275,9 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
                               + Transition_function((i, j), 1, (i, j + 1)) * (
                                           Reward_function((i, j), (i, j + 1)) + gamma * Value_of_states[i, j + 1]) \
                               + Transition_function((i, j), 1, (i, j - 1)) * (
-                                          Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1])
+                                          Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1]) \
+                              + Transition_function((i, j), 0, (i, j)) * (
+                                          Reward_function((i, j), (i, j)) + gamma * Value_of_states[i, j])
                     temp[2] = Transition_function((i, j), 2, (i + 1, j)) * (
                                 Reward_function((i, j), (i + 1, j)) + gamma * Value_of_states[i + 1, j]) \
                               + Transition_function((i, j), 2, (i - 1, j)) * (
@@ -282,7 +285,9 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
                               + Transition_function((i, j), 2, (i, j + 1)) * (
                                           Reward_function((i, j), (i, j + 1)) + gamma * Value_of_states[i, j + 1]) \
                               + Transition_function((i, j), 2, (i, j - 1)) * (
-                                          Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1])
+                                          Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1]) \
+                              + Transition_function((i, j), 0, (i, j)) * (
+                                          Reward_function((i, j), (i, j)) + gamma * Value_of_states[i, j])
                     temp[3] = Transition_function((i, j), 3, (i + 1, j)) * (
                                 Reward_function((i, j), (i + 1, j)) + gamma * Value_of_states[i + 1, j]) \
                               + Transition_function((i, j), 3, (i - 1, j)) * (
@@ -290,12 +295,14 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
                               + Transition_function((i, j), 3, (i, j + 1)) * (
                                           Reward_function((i, j), (i, j + 1)) + gamma * Value_of_states[i, j + 1]) \
                               + Transition_function((i, j), 3, (i, j - 1)) * (
-                                          Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1])
+                                          Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1]) \
+                              + Transition_function((i, j), 0, (i, j)) * (
+                                          Reward_function((i, j), (i, j)) + gamma * Value_of_states[i, j])
                     action = np.argmax(temp)
                     Value_of_states[i,j] = temp[action]
                     delta = np.maximum(delta, np.abs(v-Value_of_states[i,j]))
         #if delta < theta:
-         #break
+        #    break
 
         iter = iter +1
         print("no of iteration completed:- ")
@@ -318,7 +325,9 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
                       + Transition_function((i, j), 0, (i, j + 1)) * (
                                   Reward_function((i, j), (i, j + 1)) + gamma * Value_of_states[i, j + 1]) \
                       + Transition_function((i, j), 0, (i, j - 1)) * (
-                                  Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1])
+                                  Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1]) \
+                      + Transition_function((i, j), 0, (i, j)) * (
+                                      Reward_function((i, j), (i, j)) + gamma * Value_of_states[i, j])
 
                 temp[1] = Transition_function((i, j), 1, (i + 1, j)) * (
                     Reward_function((i, j), (i + 1, j)) + gamma * Value_of_states[i + 1, j]) \
@@ -327,7 +336,10 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
                       + Transition_function((i, j), 1, (i, j + 1)) * (
                               Reward_function((i, j), (i, j + 1)) + gamma * Value_of_states[i, j + 1]) \
                       + Transition_function((i, j), 1, (i, j - 1)) * (
-                              Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1])
+                              Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1]) \
+                      + Transition_function((i, j), 0, (i, j)) * (
+                                      Reward_function((i, j), (i, j)) + gamma * Value_of_states[i, j])
+
                 temp[2] = Transition_function((i, j), 2, (i + 1, j)) * (
                     Reward_function((i, j), (i + 1, j)) + gamma * Value_of_states[i + 1, j]) \
                       + Transition_function((i, j), 2, (i - 1, j)) * (
@@ -335,7 +347,10 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
                       + Transition_function((i, j), 2, (i, j + 1)) * (
                               Reward_function((i, j), (i, j + 1)) + gamma * Value_of_states[i, j + 1]) \
                       + Transition_function((i, j), 2, (i, j - 1)) * (
-                              Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1])
+                              Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1]) \
+                          + Transition_function((i, j), 0, (i, j)) * (
+                                      Reward_function((i, j), (i, j)) + gamma * Value_of_states[i, j])
+
                 temp[3] = Transition_function((i, j), 3, (i + 1, j)) * (
                     Reward_function((i, j), (i + 1, j)) + gamma * Value_of_states[i + 1, j]) \
                       + Transition_function((i, j), 3, (i - 1, j)) * (
@@ -343,7 +358,9 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
                       + Transition_function((i, j), 3, (i, j + 1)) * (
                               Reward_function((i, j), (i, j + 1)) + gamma * Value_of_states[i, j + 1]) \
                       + Transition_function((i, j), 3, (i, j - 1)) * (
-                              Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1])
+                              Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1]) \
+                          + Transition_function((i, j), 0, (i, j)) * (
+                                      Reward_function((i, j), (i, j)) + gamma * Value_of_states[i, j])
                 optimal_action = np.argmax(temp)
                 Policy[i,j] = optimal_action
 
@@ -351,6 +368,6 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
     return Value_of_states, Policy
 
 
-Value_of_state, Policy = Value_iteration((48,12), 0.1, 0.1, 40)
+Value_of_state, Policy = Value_iteration((48,12), 0.1, 0.1, 4000)
 with np.printoptions(threshold=np.inf):
     print(Policy[1:49, 1:24].T)
