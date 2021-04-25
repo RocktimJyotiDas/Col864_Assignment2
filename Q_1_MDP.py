@@ -16,6 +16,13 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1==1 and y_t_1 ==0:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.8)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
+
         elif x_t == 1 and y_t == 23:
             if x_t_1==1 and y_t_1 ==23:
                 return np.float(0.2/3 + 0.8)
@@ -23,11 +30,27 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == 1 and y_t_1 == 24:
                 return np.float(0.0)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
+
         elif x_t == 1 and y_t in range(2,23):
             if x_t_1==x_t and y_t_1 ==y_t:
                 return np.float(0.2/3)
             elif x_t_1 == 0 and y_t_1 == y_t:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.8)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
+
 
         #middle_wall
         elif x_t == 24 and y_t == 1:
@@ -37,6 +60,12 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t-1:
                 return np.float(0.0)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.8)
+            else:
+                return np.float(0.0)
 
         elif x_t == 24 and y_t == 23:
             if x_t_1==24 and y_t_1 ==23:
@@ -45,11 +74,28 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t+1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+
+            else:
+                return np.float(0.0)
+
 
         elif x_t == 24 and y_t in range(2,12)  or x_t == 24 and y_t in range(13,23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.2/3)
             elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.8)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+
+            else:
                 return np.float(0.0)
 
         elif x_t == 27 and y_t == 1:
@@ -59,6 +105,12 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t-1:
                 return np.float(0.0)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.8)
+            else:
+                return np.float(0.0)
 
         elif x_t == 27 and y_t == 23:
             if x_t_1==27 and y_t_1 ==23:
@@ -67,11 +119,25 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t+1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
 
         elif x_t == 27 and y_t in range(2,12) or x_t == 27 and y_t in range(13,23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.2/3)
             elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.8)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
                 return np.float(0.0)
 
         elif x_t in [25,26] and y_t ==12:
@@ -80,6 +146,12 @@ def Transition_function(state_t, action_t, state_t_1):
             elif x_t_1== x_t and y_t_1 == y_t-1:
                 return np.float(0.0)
             elif x_t_1== x_t and y_t_1 == y_t+1:
+                return np.float(0.0)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
                 return np.float(0.0)
 
 
@@ -91,6 +163,12 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1== x_t and y_t_1 == y_t-1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.8)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
 
 
         elif x_t == 48 and y_t == 23:
@@ -100,19 +178,34 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1== x_t and y_t_1 == y_t+1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+
+            else:
+                return np.float(0.0)
 
         elif x_t == 48 and y_t in range(2,23):
             if x_t_1==x_t and y_t_1 ==y_t:
                 return np.float(0.2/3)
             elif x_t_1== x_t + 1 and y_t_1 == y_t:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.8)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
 
-        elif x_t_1 == x_t and y_t_1 == y_t+1:
-            return np.float(0.8)
         elif x_t_1 == x_t+1 and y_t_1 == y_t:
             return np.float(0.2/3)
         elif x_t_1 == x_t and y_t_1 == y_t-1:
             return np.float(0.2/3)
+        elif x_t_1 == x_t and y_t_1 == y_t+1:
+            return np.float(0.8)
         elif x_t_1 == x_t-1 and y_t_1 == y_t:
             return np.float(0.2/3)
         else:
@@ -129,6 +222,13 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == 1 and y_t_1 == 0:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.8)
+            else:
+                return np.float(0.0)
+
         elif x_t == 1 and y_t == 23:
             if x_t_1 == 1 and y_t_1 == 23:
                 return np.float(0.4 / 3)
@@ -136,11 +236,27 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == 1 and y_t_1 == 24:
                 return np.float(0.0)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.8)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
+
         elif x_t == 1 and y_t in range(2, 23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.2 / 3)
             elif x_t_1 == 0 and y_t_1 == y_t:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.8)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
+
 
         # middle_wall
         elif x_t == 24 and y_t == 1:
@@ -150,6 +266,12 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t - 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2/3)
+            else:
+                return np.float(0.0)
 
         elif x_t == 24 and y_t == 23:
             if x_t_1 == 24 and y_t_1 == 23:
@@ -158,11 +280,27 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t + 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+
+            else:
+                return np.float(0.0)
 
         elif x_t == 24 and y_t in range(2, 12) or x_t == 24 and y_t in range(13, 23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.8 )
             elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+
+            else:
                 return np.float(0.0)
 
         elif x_t == 27 and y_t == 1:
@@ -172,6 +310,12 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t - 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.8)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
 
         elif x_t == 27 and y_t == 23:
             if x_t_1 == 27 and y_t_1 == 23:
@@ -180,11 +324,26 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t + 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.8)
+            else:
+                return np.float(0.0)
+
 
         elif x_t == 27 and y_t in range(2, 12) or x_t == 27 and y_t in range(13, 23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.2 / 3)
             elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.8)
+            else:
                 return np.float(0.0)
 
         elif x_t in [25, 26] and y_t == 12:
@@ -193,6 +352,12 @@ def Transition_function(state_t, action_t, state_t_1):
             elif x_t_1 == x_t and y_t_1 == y_t - 1:
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.0)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.8)
+            else:
                 return np.float(0.0)
 
 
@@ -204,6 +369,12 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t - 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
 
 
         elif x_t == 48 and y_t == 23:
@@ -213,11 +384,26 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t + 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+
+            else:
+                return np.float(0.0)
 
         elif x_t == 48 and y_t in range(2, 23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.8)
             elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
                 return np.float(0.0)
 
         elif x_t_1 == x_t and y_t_1 == y_t + 1:
@@ -241,6 +427,13 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == 1 and y_t_1 == 0:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
+
         elif x_t == 1 and y_t == 23:
             if x_t_1 == 1 and y_t_1 == 23:
                 return np.float(0.2/ 3 + 0.8)
@@ -248,11 +441,27 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == 1 and y_t_1 == 24:
                 return np.float(0.0)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
+
         elif x_t == 1 and y_t in range(2, 23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.8)
             elif x_t_1 == 0 and y_t_1 == y_t:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
+
 
         # middle_wall
         elif x_t == 24 and y_t == 1:
@@ -262,6 +471,12 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t - 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.8)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
 
         elif x_t == 24 and y_t == 23:
             if x_t_1 == 24 and y_t_1 == 23:
@@ -270,11 +485,27 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t + 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.8)
+
+            else:
+                return np.float(0.0)
 
         elif x_t == 24 and y_t in range(2, 12) or x_t == 24 and y_t in range(13, 23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.2/3 )
             elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.8)
+
+            else:
                 return np.float(0.0)
 
         elif x_t == 27 and y_t == 1:
@@ -284,6 +515,12 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t - 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
 
         elif x_t == 27 and y_t == 23:
             if x_t_1 == 27 and y_t_1 == 23:
@@ -292,11 +529,26 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t + 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
+
 
         elif x_t == 27 and y_t in range(2, 12) or x_t == 27 and y_t in range(13, 23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.8)
             elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
                 return np.float(0.0)
 
         elif x_t in [25, 26] and y_t == 12:
@@ -305,6 +557,12 @@ def Transition_function(state_t, action_t, state_t_1):
             elif x_t_1 == x_t and y_t_1 == y_t - 1:
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.0)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.8)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
                 return np.float(0.0)
 
 
@@ -316,6 +574,12 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t - 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.8)
+            else:
+                return np.float(0.0)
 
 
         elif x_t == 48 and y_t == 23:
@@ -325,11 +589,26 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t + 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.8)
+
+            else:
+                return np.float(0.0)
 
         elif x_t == 48 and y_t in range(2, 23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.2/3)
             elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.8)
+            else:
                 return np.float(0.0)
 
         elif x_t_1 == x_t and y_t_1 == y_t + 1:
@@ -358,6 +637,13 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == 1 and y_t_1 == 0:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
+
         elif x_t == 1 and y_t == 23:
             if x_t_1 == 1 and y_t_1 == 23:
                 return np.float(0.4/ 3)
@@ -365,11 +651,27 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == 1 and y_t_1 == 24:
                 return np.float(0.0)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.8)
+            else:
+                return np.float(0.0)
+
         elif x_t == 1 and y_t in range(2, 23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.2/3)
             elif x_t_1 == 0 and y_t_1 == y_t:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.8)
+            else:
+                return np.float(0.0)
+
 
         # middle_wall
         elif x_t == 24 and y_t == 1:
@@ -379,6 +681,12 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t - 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
 
         elif x_t == 24 and y_t == 23:
             if x_t_1 == 24 and y_t_1 == 23:
@@ -387,11 +695,27 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t + 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.8)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+
+            else:
+                return np.float(0.0)
 
         elif x_t == 24 and y_t in range(2, 12) or x_t == 24 and y_t in range(13, 23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.2/3 )
             elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.8)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+
+            else:
                 return np.float(0.0)
 
         elif x_t == 27 and y_t == 1:
@@ -401,6 +725,12 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t - 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
 
         elif x_t == 27 and y_t == 23:
             if x_t_1 == 27 and y_t_1 == 23:
@@ -409,12 +739,28 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t + 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.8)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
+
 
         elif x_t == 27 and y_t in range(2, 12) or x_t == 27 and y_t in range(13, 23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.2/3)
             elif x_t_1 == x_t - 1 and y_t_1 == y_t:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.8)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
+
 
         elif x_t in [25, 26] and y_t == 12:
             if x_t_1 == x_t and y_t_1 == y_t:
@@ -422,6 +768,12 @@ def Transition_function(state_t, action_t, state_t_1):
             elif x_t_1 == x_t and y_t_1 == y_t - 1:
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.0)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
                 return np.float(0.0)
 
 
@@ -433,6 +785,12 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t - 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
+                return np.float(0.0)
 
 
         elif x_t == 48 and y_t == 23:
@@ -442,11 +800,26 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
             elif x_t_1 == x_t and y_t_1 == y_t + 1:
                 return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+
+            else:
+                return np.float(0.0)
 
         elif x_t == 48 and y_t in range(2, 23):
             if x_t_1 == x_t and y_t_1 == y_t:
                 return np.float(0.2/3)
             elif x_t_1 == x_t + 1 and y_t_1 == y_t:
+                return np.float(0.0)
+            elif x_t_1 == x_t and y_t_1 == y_t - 1:
+                return np.float(0.8)
+            elif x_t_1 == x_t and y_t_1 == y_t + 1:
+                return np.float(0.2 / 3)
+            elif x_t_1 == x_t - 1 and y_t_1 == y_t:
+                return np.float(0.2 / 3)
+            else:
                 return np.float(0.0)
 
         elif x_t_1 == x_t and y_t_1 == y_t + 1:
@@ -463,49 +836,7 @@ def Transition_function(state_t, action_t, state_t_1):
 
 
 
-    #SOuth_old
-    elif actions[action_t] == "south":
-        if x_t == 1 and y_t == 1 and x_t_1 == 1 and y_t_1 == 1:
-            return np.float(0.2 / 3 + 0.8)
-        elif x_t == 1 and y_t == 23 and x_t_1 == 1 and y_t_1 == 23:
-            return np.float(0.4/ 3)
-        elif x_t == 1 and y_t in range(2,23) and x_t_1==x_t and y_t_1 ==y_t:
-            return np.float(0.2/3)
 
-        elif x_t == 24 and y_t == 1 and x_t_1 == 24 and y_t_1 == 1:
-            return np.float(0.2 / 3 + 0.8)
-        elif x_t == 24 and y_t == 23 and x_t_1 == 24 and y_t_1 == 23:
-            return np.float(0.4/3)
-        elif x_t == 24 and y_t in range(2,12) and x_t_1==x_t and y_t_1 ==y_t or x_t == 24 and y_t in range(13,23) and x_t_1==x_t and y_t_1 ==y_t:
-            return np.float(0.2/3)
-
-        elif x_t == 27 and y_t == 1 and x_t_1 == 27 and y_t_1 == 1:
-            return np.float(0.2 / 3 + 0.8)
-        elif x_t == 27 and y_t == 23 and x_t_1 == 27 and y_t_1 == 23:
-            return np.float(0.4/ 3)
-        elif x_t == 27 and y_t in range(2,12) and x_t_1==x_t and y_t_1 ==y_t or x_t == 27 and y_t in range(13,23) and x_t_1==x_t and y_t_1 ==y_t:
-            return np.float(0.2/3)
-
-        elif x_t in [25,26] and y_t ==12 and x_t_1==x_t and y_t_1 ==y_t:
-            return np.float(0.2/3 + 0.8)
-
-        elif x_t == 48 and y_t == 1 and x_t_1 == 48 and y_t_1 == 1:
-            return np.float(0.2 / 3 + 0.8)
-        elif x_t == 48 and y_t == 23 and x_t_1 == 48 and y_t_1 == 23:
-            return np.float(0.4/3)
-        elif x_t == 48 and y_t in range(2,23) and x_t_1==x_t and y_t_1 ==y_t:
-            return np.float(0.2/3)
-
-        elif x_t_1 == x_t and y_t_1 == y_t + 1:
-            return np.float(0.2 / 3)
-        elif x_t_1 == x_t + 1 and y_t_1 == y_t:
-            return np.float(0.2/3)
-        elif x_t_1 == x_t and y_t_1 == y_t - 1:
-            return np.float(0.8)
-        elif x_t_1 == x_t - 1 and y_t_1 == y_t:
-            return np.float(0.2/3)
-        else:
-            return np.float(0.0)
 
 
 
@@ -583,7 +914,7 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
                 if i in [25,26] and j in range(1,12) or i in [25,26] and j in range(13,24):
                     Value_of_states[i,j] = 0
                 if i == 48 and j == 12:
-                    continue
+                    Value_of_states[i,j] = Reward_function((i,j), (i,j)) + gamma* Value_of_states[i,j]
                 else:
                     v = Value_of_states[i,j]
                     temp = np.zeros(4)
@@ -697,3 +1028,4 @@ Value_of_state, Policy = Value_iteration((48,12), 0.1, 0.1, 4000)
 with np.printoptions(threshold=np.inf):
     print(Policy[1:49, 1:24].T)
     print(Value_of_state[1:49, 1:24])
+    print(Value_of_state[48,12])
