@@ -1080,11 +1080,11 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
                     action = np.argmax(temp)
                     Value_of_states[i,j] = temp[action]
 
-                    if iter == iterations -1 and i == 25 and j == 12:
-                        print((i, j))
-                        print(temp)
-                        print(np.argmax(temp))
-                        print(v)
+                    #if iter == iterations -1 and i == 25 and j == 12:
+                    #    print((i, j))
+                    #    print(temp)
+                    #    print(np.argmax(temp))
+                    #    print(v)
 
                     Policy2[i,j] = action
                     delta = np.maximum(delta, np.abs(v-Value_of_states[i,j]))
@@ -1148,9 +1148,9 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
                               Reward_function((i, j), (i, j - 1)) + gamma * Value_of_states[i, j - 1]) \
                           + Transition_function((i, j), 3, (i, j)) * (
                                       Reward_function((i, j), (i, j)) + gamma * Value_of_states[i, j])
-                if i == 2 and j == 23:
-                    print(temp)
-                    print(np.argmax(temp))
+                #if i == 2 and j == 23:
+                #    print(temp)
+                #    print(np.argmax(temp))
                 optimal_action = np.argmax(temp)
                 Policy[i,j] = optimal_action
 
@@ -1158,15 +1158,11 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
     return Value_of_states, Policy, Policy2
 
 
-Value_of_state, Policy, Policy2 = Value_iteration((48,12), 0.1, 0.9, 1000)
+Value_of_state, Policy, Policy2 = Value_iteration((48,12), 0.1, 0.94, 1000)
 
 
 
-for jj in range(1,24):
-    print((47,jj))
-    print(Value_of_state[47,jj])
-    print((48,jj))
-    print(Value_of_state[48, jj])
+
 
 
 from PIL import Image
@@ -1174,7 +1170,8 @@ Image_value = (255 * (Value_of_state - np.min(Value_of_state)) / np.ptp(Value_of
 im = Image.fromarray(Image_value)
 resized_img = im.resize((400, 800))
 resized_img.show()
-print(iter)
+resized_img .save('gfg_dummy_pic.png')
+
 
 
 with np.printoptions(threshold=np.inf):
