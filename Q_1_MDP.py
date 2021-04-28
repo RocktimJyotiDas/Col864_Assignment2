@@ -977,9 +977,10 @@ def Reward_function(state_t, state_t_1):
             or x_t_1 in [25,26] and y_t_1 in range(1,12) or x_t_1 in [25,26] and y_t_1 in range(13,24) \
             or x_t in [25,26] and y_t in range(1,12) or x_t in [25,26] and y_t in range(13,24):
         return -10000000
-
+    #Goal
     if x_t_1== 48 and y_t_1 == 12:
         return 100
+    #lEFT WALL
     if x_t == 1 and y_t == 1 and x_t_1 == 1 and y_t_1 == 1:
         return -1
     elif x_t == 1 and y_t == 23 and x_t_1 == 1 and y_t_1 == 23:
@@ -987,6 +988,7 @@ def Reward_function(state_t, state_t_1):
     elif x_t == 1 and y_t in range(2, 23) and x_t_1 == x_t and y_t_1 == y_t:
         return -1
 
+    #MIDDLE WALL
     elif x_t == 24 and y_t == 1 and x_t_1 == 24 and y_t_1 == 1:
         return -1
     elif x_t == 24 and y_t == 23 and x_t_1 == 24 and y_t_1 == 23:
@@ -1006,14 +1008,19 @@ def Reward_function(state_t, state_t_1):
     elif x_t in [25, 26] and y_t == 12 and x_t_1 == x_t and y_t_1 == y_t:
         return -1
 
+    #RIGHT WALL
     elif x_t == 48 and y_t == 1 and x_t_1 == 48 and y_t_1 == 1:
         return -1
     elif x_t == 48 and y_t == 23 and x_t_1 == 48 and y_t_1 == 23:
         return -1
     elif x_t == 48 and y_t in range(2, 23) and x_t_1 == x_t and y_t_1 == y_t:
         return -1
+
+    #BOTTOM WALL
     elif x_t in range(2, 25) and y_t == 1 and x_t_1 == x_t and y_t_1 == y_t or x_t in range(27, 49) and y_t == 1 and x_t_1 == x_t and y_t_1 == y_t:
         return -1
+
+    #TOP WALL
     elif x_t in range(2, 25) and y_t == 23 and x_t_1 == x_t and y_t_1 == y_t or x_t in range(27, 49) and y_t == 23 and x_t_1 == x_t and y_t_1 == y_t:
         return -1
     else:
@@ -1172,6 +1179,22 @@ resized_img = im.resize((400, 800))
 resized_img.show()
 resized_img .save('gfg_dummy_pic.png')
 
+
+Policy2_image = np.zeros((48,23,3), dtype= np.uint8)
+for ki in range(1,49):
+    for kj in range(1,24):
+        if Policy2[ki,kj] == 0:
+            Policy2_image[ki-1, kj-1] = [255, 0,0]
+        elif Policy2[ki,kj] == 1:
+            Policy2_image[ki-1, kj-1] = [0,255, 0]
+        elif Policy2[ki, kj] == 2:
+            Policy2_image[ki - 1, kj - 1] = [0,0,255]
+        elif Policy2[ki,kj] == 0:
+            Policy2_image[ki-1, kj-1] = [255, 255,255]
+img2 = Image.fromarray(Policy2_image, 'RGB')
+resized_img2 = img2.resize((200, 400))
+resized_img2.show()
+resized_img2.save('Policy.png')
 
 
 with np.printoptions(threshold=np.inf):
