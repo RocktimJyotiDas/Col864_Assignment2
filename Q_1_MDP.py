@@ -996,11 +996,11 @@ def Reward_function(state_t, state_t_1):
         return -1
 
     #BOTTOM WALL
-    elif x_t in range(2, 25) and y_t == 1 and x_t_1 == x_t and y_t_1 == y_t or x_t in range(27, 49) and y_t == 1 and x_t_1 == x_t and y_t_1 == y_t:
+    elif x_t in range(2, 25) and y_t == 1 and x_t_1 == x_t and y_t_1 == y_t or x_t in range(27, 48) and y_t == 1 and x_t_1 == x_t and y_t_1 == y_t:
         return -1
 
     #TOP WALL
-    elif x_t in range(2, 25) and y_t == 23 and x_t_1 == x_t and y_t_1 == y_t or x_t in range(27, 49) and y_t == 23 and x_t_1 == x_t and y_t_1 == y_t:
+    elif x_t in range(2, 25) and y_t == 23 and x_t_1 == x_t and y_t_1 == y_t or x_t in range(27, 48) and y_t == 23 and x_t_1 == x_t and y_t_1 == y_t:
         return -1
     else:
         return 0
