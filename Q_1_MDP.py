@@ -1170,6 +1170,25 @@ resized_img2.show()
 resized_img2.save('Policy2.png')
 
 
+
+Policy21_image = np.zeros((48,23,3), dtype= np.uint8)
+for ki in range(1,49):
+    for kj in range(1,24):
+        if Policy[ki,kj] == 0:
+            Policy21_image[ki-1, kj-1] = [255, 0,0]
+        elif Policy[ki,kj] == 1:
+            Policy21_image[ki-1, kj-1] = [0,255, 0]
+        elif Policy[ki, kj] == 2:
+            Policy21_image[ki - 1, kj - 1] = [0,0,255]
+        elif Policy[ki,kj] == 0:
+            Policy21_image[ki-1, kj-1] = [0, 0,0]
+img21 = Image.fromarray(Policy21_image, 'RGB')
+resized_img21 = img21.resize((200, 400))
+resized_img21.show()
+resized_img21.save('Policy21.png')
+
+
+
 with np.printoptions(threshold=np.inf):
     #print(Policy[1:49, 1:24])
     print(Policy2[1:49, 1:24])
