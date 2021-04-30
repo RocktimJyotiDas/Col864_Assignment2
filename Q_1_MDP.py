@@ -201,7 +201,7 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.2 / 3)
             else:
                 return np.float(0.0)
-        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,49) and y_t ==1:
+        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,48) and y_t ==1:
             if x_t_1==x_t and y_t_1 ==y_t:
                 return np.float(0.2/3)
             elif x_t_1== x_t + 1 and y_t_1 == y_t:
@@ -215,7 +215,7 @@ def Transition_function(state_t, action_t, state_t_1):
             else:
                 return np.float(0.0)
 
-        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,49) and y_t ==23:
+        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,48) and y_t ==23:
             if x_t_1==x_t and y_t_1 ==y_t:
                 return np.float(0.8)
             elif x_t_1== x_t + 1 and y_t_1 == y_t:
@@ -434,7 +434,8 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.2 / 3)
             else:
                 return np.float(0.0)
-        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,49) and y_t ==1:
+
+        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,48) and y_t ==1:
             if x_t_1==x_t and y_t_1 ==y_t:
                 return np.float(0.2/3)
             elif x_t_1== x_t + 1 and y_t_1 == y_t:
@@ -448,7 +449,7 @@ def Transition_function(state_t, action_t, state_t_1):
             else:
                 return np.float(0.0)
 
-        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,49) and y_t ==23:
+        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,48) and y_t ==23:
             if x_t_1==x_t and y_t_1 ==y_t:
                 return np.float(0.2/3)
             elif x_t_1== x_t + 1 and y_t_1 == y_t:
@@ -666,7 +667,7 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.8)
             else:
                 return np.float(0.0)
-        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,49) and y_t ==1:
+        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,48) and y_t ==1:
             if x_t_1==x_t and y_t_1 ==y_t:
                 return np.float(0.2/3)
             elif x_t_1== x_t + 1 and y_t_1 == y_t:
@@ -680,7 +681,7 @@ def Transition_function(state_t, action_t, state_t_1):
             else:
                 return np.float(0.0)
 
-        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,49) and y_t ==23:
+        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,48) and y_t ==23:
             if x_t_1==x_t and y_t_1 ==y_t:
                 return np.float(0.2/3)
             elif x_t_1== x_t + 1 and y_t_1 == y_t:
@@ -904,7 +905,7 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.2 / 3)
             else:
                 return np.float(0.0)
-        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,49) and y_t ==1:
+        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,48) and y_t ==1:
             if x_t_1==x_t and y_t_1 ==y_t:
                 return np.float(0.8)
             elif x_t_1== x_t + 1 and y_t_1 == y_t:
@@ -919,7 +920,7 @@ def Transition_function(state_t, action_t, state_t_1):
                 return np.float(0.0)
 
 
-        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,49) and y_t ==23:
+        elif x_t in range(2,25) and y_t == 1 or x_t in range(27,48) and y_t ==23:
             if x_t_1==x_t and y_t_1 ==y_t:
                 return np.float(0.2/3)
             elif x_t_1== x_t + 1 and y_t_1 == y_t:
@@ -943,28 +944,6 @@ def Transition_function(state_t, action_t, state_t_1):
             return np.float(0.2 / 3)
         else:
             return np.float(0.0)
-
-
-
-
-
-
-
-
-
-
-#
-#for test_j in range(1,24):
- #       print((1,test_j))
-  #      print(Transition_function((1,test_j), 0, (1,test_j)))
-   #     print(Transition_function((1, test_j), 0, (2, test_j)))
-    #    print(Transition_function((1, test_j), 0, (1, test_j+1)))
-
-
-
-
-
-
 
 
 
@@ -1087,12 +1066,6 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
                     action = np.argmax(temp)
                     Value_of_states[i,j] = temp[action]
 
-                    #if iter == iterations -1 and i == 25 and j == 12:
-                    #    print((i, j))
-                    #    print(temp)
-                    #    print(np.argmax(temp))
-                    #    print(v)
-
                     Policy2[i,j] = action
                     delta = np.maximum(delta, np.abs(v-Value_of_states[i,j]))
         if delta < theta:
@@ -1165,7 +1138,7 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
     return Value_of_states, Policy, Policy2
 
 
-Value_of_state, Policy, Policy2 = Value_iteration((48,12), 0.1, 0.94, 1000)
+Value_of_state, Policy, Policy2 = Value_iteration((48,12), 0.1, 0.99, 1000)
 
 
 
@@ -1194,7 +1167,7 @@ for ki in range(1,49):
 img2 = Image.fromarray(Policy2_image, 'RGB')
 resized_img2 = img2.resize((200, 400))
 resized_img2.show()
-resized_img2.save('Policy.png')
+resized_img2.save('Policy2.png')
 
 
 with np.printoptions(threshold=np.inf):
