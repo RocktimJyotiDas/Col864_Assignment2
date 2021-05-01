@@ -9,7 +9,7 @@ def Environment_interaction_next_state_reward(s_t, action, goal_state):
     x_t, y_t = s_t
     #once the goal state is reached  the navigator stays at the goal state and return 0 reward
     if x_t == goal_state[0] and y_t == goal_state[1]:
-        return (48,12), 0
+        return (goal_state[0],goal_state[1]), 0
     actual_action = -1
     if actions[action] == "north":
         actual_action = np.random.choice([0,1,2,3], p = [0.8, np.float(0.2/3), np.float(0.2/3), np.float(0.2/3)])
@@ -29,6 +29,11 @@ def Environment_interaction_next_state_reward(s_t, action, goal_state):
         next_state =(x_t + 1, y_t)
     elif actual_action == 3:
         next_state = (x_t - 1, y_t)
+
+    if next_state[0] < 1 or next_state[0] > 48:
+        return (s_t, -1)
+    if next_state[1] < 1 or next_state[1] > 23:
+        return (s_t, -1)
 
     if next_state[0] >= 1 and next_state[0] <= 48:
         if next_state[1] >= 1 and next_state[1]<=23:
