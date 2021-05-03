@@ -1,6 +1,6 @@
 import numpy as np
 import random
-import math as mt
+from plotpolicy import plot_policy
 actions = {0:"north", 1:"south", 2:"east", 3:"west"}
 
 
@@ -46,12 +46,13 @@ def Environment_interaction_next_state_reward(s_t, action, goal_state):
                     return next_state, 0
 
 def epsilon_greedy(epsilon,Q_values):
-    action_ty = np.choice(["greedy", "explore"], p = [1-epsilon, epsilon])
+    action_ty = np.random.choice(["greedy", "explore"], p = [1-epsilon, epsilon])
     if action_ty == "greedy":
-        values = np.array(Q_values.values())
+        values = np.array([Q_values[0], Q_values[1], Q_values[2], Q_values[3]])
         return np.argmax(values)
     elif action_ty == "explore":
-        return np.choice([0,1,2,3] , p = [0.25, 0.25, 0.25,0.25])
+        #print("explore")
+        return np.random.choice([0,1,2,3] , p = [0.25, 0.25, 0.25,0.25])
 
 
 def Q_learning_algorithm(epsilon, alpha, gamma, goal_state, no_of_episodes):
@@ -70,13 +71,19 @@ def Q_learning_algorithm(epsilon, alpha, gamma, goal_state, no_of_episodes):
 
 
     for i in range(no_of_episodes):
-        hack1 = (random.randint(1,26),random.randint(1,24))
-        hack2 = (random.randint(27, 49), random.randint(1, 24))
-        present_state = np.choice([hack1, hack2], p = [0.5, 0.5])
+        present_state = None
+        while present_state == None:
+            present_state= (random.randint(1,48),random.randint(1,23))
+            if present_state[0] in [25,26] and present_state[1] in range(1,12) or present_state[0] in [25,26] and present_state[1] in range(13,24):
+                present_state = None
+        print("Episode running")
+        print(i+1)
         while(True):
+
             current_action = epsilon_greedy(epsilon, Q_value[present_state])
             next_state, reward = Environment_interaction_next_state_reward(present_state,current_action,goal_state)
-            values = np.array(Q_value[next_state].values())
+            values = np.array([Q_value[next_state][0],Q_value[next_state][1],Q_value[next_state][2],Q_value[next_state][3]])
+            #print(values)
             increment_1 = values[np.argmax(values)]
             Q_value[present_state][current_action] = (1 - alpha)*Q_value[present_state][current_action] + alpha*(reward + gamma*increment_1)
             present_state = next_state
@@ -85,5 +92,16 @@ def Q_learning_algorithm(epsilon, alpha, gamma, goal_state, no_of_episodes):
     return  Q_value
 
 
+q_value = Q_learning_algorithm(0.05, 0.25,0.99,(48,12),4000)
+Policy3 = np.zeros((50,25))
+
+for ki in range(1,49):
+    for kj in range(1,24):
+        if ki in [25, 26] and kj in range(1, 12) or ki in [25, 26] and kj in range(13, 24):
+            continue
+        else:
+            Policy3[ki, kj] = np.argmax(np.array([q_value[(ki,kj)][0], q_value[(ki,kj)][1], q_value[(ki,kj)][2], q_value[(ki,kj)][3]]))
 
 
+Value = np.random.normal(5, 20, size=(50,25))
+plot_policy(Policy3.T, Value.T)
