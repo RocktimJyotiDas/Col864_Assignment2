@@ -1,7 +1,7 @@
 import numpy as np
 import math as mt
 import matplotlib.pyplot as plt 
-from plotpolicy import plot_policy
+from plotpolicy import plot_policy, plot_visited
 from mdputils import Next_state_and_reward
 from simulatepolicy import plot_simulation, simulate_policy
 actions = {0:"north", 1:"south", 2:"east", 3:"west"}
@@ -120,7 +120,7 @@ def Value_iteration(goal_state= (48,12), theta=0.1, gamma=0.1, iterations =10):
             break
         iter = iter + 1
         
-        V_history[iter] = V
+        V_history[iter] = V.copy()
         delta_history.append(delta)
 
         print("Iteration completed.")
@@ -171,14 +171,15 @@ for n in range(N_times):
     states, actions, rewards = simulate_policy((1,1), Policy2, 100)
     for s in states:
         n_visited[s[0], s[1]] += 1
-
+'''
 plt.imshow(n_visited.T, cmap='gray')
 plt.show()
 
 n_visited[48, 12] = 0
 plt.imshow(n_visited.T, cmap='gray')
 plt.show()
-
+'''
+plot_visited(n_visited)
 #now visualizing how max_norm changes over different values of gamma.
 fig, ax = plt.subplots(1, 2)
 Value_of_state, Policy2, V_history, delta_hist, c = Value_iteration((48,12), None, 0.99, 500)
@@ -189,39 +190,3 @@ ax[0].plot(delta_hist, 'b'); ax[1].plot(c, 'b')
 ax[0].set_title("Max_norm over different values of the discount factor: 0.99 and 0.01")
 ax[1].set_title("Changes in the policy over different iterations")
 plt.show()
-
-'''
-
-from PIL import Image
-Image_value = (255 * (Value_of_state - np.min(Value_of_state)) / np.ptp(Value_of_state)).astype(int)
-im = Image.fromarray(Image_value)
-resized_img = im.resize((400, 800))
-resized_img.show()
-resized_img .save('gfg_dummy_pic2.png')
-
-
-Policy2_image = np.zeros((48,23,3), dtype= np.uint8)
-for ki in range(1,49):
-    for kj in range(1,24):
-        if Policy2[ki,kj] == 0:
-            Policy2_image[ki-1, kj-1] = [255, 0,0]
-        elif Policy2[ki,kj] == 1:
-            Policy2_image[ki-1, kj-1] = [0,255, 0]
-        elif Policy2[ki, kj] == 2:
-            Policy2_image[ki - 1, kj - 1] = [0,0,255]
-        elif Policy2[ki,kj] == 0:
-            Policy2_image[ki-1, kj-1] = [255, 255,255]
-img2 = Image.fromarray(Policy2_image, 'RGB')
-resized_img2 = img2.resize((200, 400))
-resized_img2.show()
-resized_img2.save('Policy23.png')
-
-
-with np.printoptions(threshold=np.inf):
-    #print(Policy[1:49, 1:24])
-    print(Policy2[1:49, 1:24])
-
-    print(Value_of_state[1:49, 1:24])
-    print(Value_of_state[48,12])
-
-'''

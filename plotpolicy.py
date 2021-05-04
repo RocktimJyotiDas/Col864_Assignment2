@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as shapes
+import os
 
 actions = {0:"north", 1:"south", 2:"east", 3:"west"}
 orientation_dict = {"north":"down", "south":"up", "east":"right", "west":"left"}
@@ -54,12 +55,42 @@ def plot_policy(P, V, orientation_dict = orientation_dict, overlay=False):
 
     plt.show()
 
-def plot_policy2(P, V, orientation_dict = orientation_dict, grid=False, title='Policy Plot'):
+def plot_visited(v, goal_state=(48, 12), outdir=None, plot=True):
+    _, ax = plt.subplots()
+    v[goal_state] = 0
+    v /= np.max(v)
+    for y in range(25):
+        for x in range(50):
+            #color the walls
+            
+            if(x > 0 and x < 49 and y > 0 and y < 24 and not (x in [25,26] and (y in range(1,12) or y in range(13,24))) and not (x == goal_state[0] and y== goal_state[1]) ):
+                marker = shapes.Rectangle((x, y), width=1, height=1, color=f'{v[x, y]}')
+                ax.add_artist(marker)
+            else:
+                if(x == goal_state[0] and y == goal_state[1]):
+                    marker = shapes.Rectangle((x, y), width=1, height=1, color='red')
+                else:    
+                    marker = shapes.Rectangle((x, y), width=1, height=1, color='blue')
+                ax.add_artist(marker)
+
+    
+    ax.set_xticks(np.arange(0, 50, 1))
+    ax.set_yticks(np.arange(0, 25, 1))
+    ax.set_xlim([0,50])
+    ax.set_ylim([0,25])
+    #ax.grid(b=True, which='major')
+    ax.set_title('Visualization of states visited')
+    if outdir is not None:
+        plt.savefig(outdir, dpi=300)
+    if plot:
+        plt.show()
+
+def plot_policy2(P, V, orientation_dict = orientation_dict, grid=False, title='Policy Plot', outdir=None, plot=True):
     #P - policy, V - value function
     assert P.shape[0] == 25 and P.shape[1] == 50, "Improper input to the function"
     assert P.shape == V.shape, "Improper input to the function"
     _, ax = plt.subplots()
-    ax.imshow(V)
+    ax.imshow(V, cmap='gray')
     for y in range(25):
         for x in range(50):
             #color the walls
@@ -77,9 +108,14 @@ def plot_policy2(P, V, orientation_dict = orientation_dict, grid=False, title='P
     
     ax.set_xticks(np.arange(0, 50, 1))
     ax.set_yticks(np.arange(0, 25, 1))
+    ax.set_xlim([0,50])
+    ax.set_ylim([0,25])
+    
     if(grid):
         ax.grid(b=True, which='major')
     ax.set_title(title)
-
-    plt.show()
+    if outdir is not None:
+        plt.savefig(outdir, dpi=300)
+    if plot:
+        plt.show()
     

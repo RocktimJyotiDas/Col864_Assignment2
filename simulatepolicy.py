@@ -22,7 +22,9 @@ def simulate_policy(start_state, P, iter=200):
         x, y = next_state
     return states, actions, rewards
 
-def plot_simulation(states, actions, goal_state=(48, 12)):
+
+
+def plot_simulation(states, actions, goal_state=(48, 12), outdir=None, plot=True):
     _, ax = plt.subplots()
     
     for y in range(25):
@@ -54,9 +56,13 @@ def plot_simulation(states, actions, goal_state=(48, 12)):
     
     ax.set_xticks(np.arange(0, 50, 1))
     ax.set_yticks(np.arange(0, 25, 1))
+    ax.set_xlim([0,50])
+    ax.set_ylim([0,25])
     ax.grid(b=True, which='major')
     ax.set_title('Policy Plot')
-
-    plt.show()
+    if outdir is not None:
+        plt.savefig(outdir, dpi=300)
+    if plot:
+        plt.show()
     
 

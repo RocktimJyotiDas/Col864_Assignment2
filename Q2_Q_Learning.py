@@ -4,10 +4,11 @@ from plotpolicy import plot_policy, plot_policy2
 from simulatepolicy import plot_simulation, simulate_policy
 import argparse
 import matplotlib.pyplot as plt
+import os
+
 from tqdm import tqdm
 
 actions = {0:"north", 1:"south", 2:"east", 3:"west"}
-
 
 
 def Environment_interaction_next_state_reward(s_t, action, goal_state):
@@ -108,16 +109,26 @@ parser.add_argument('-e', '--episodes', help='no of episodes to run', type=int, 
 parser.add_argument('--eps', help='exploring probability', type=float, default=0.05)
 parser.add_argument('-a', '--alpha', help='learning rate', type=float, default=0.25)
 parser.add_argument('-g', '--gamma', help='discount factor', type=float, default=0.99)
+parser.add_argument('-s', '--savefigs', help='save figures', action='store_true')
+parser.add_argument('--silent', help='dont show digures', action='store_true')
+parser.add_argument('-o', '--outdir', help='output directory', default='./pics/q2')
 
 args = parser.parse_args()
 eps = args.eps
 episodes = args.episodes
 alpha = args.alpha
 gamma = args.gamma
+savefig = args.savefigs
+outdir = os.path.abspath(args.outdir)
+plot = not args.silent
+
+print(f'savefigs = {savefig}, outdir={outdir}, plotfigs={plot}')
 
 q_value, reward_history = Q_learning_algorithm(eps, alpha, gamma, (48,12), episodes)
 Policy3 = np.zeros((50,25))
 Value = np.zeros((50, 25))
+
+
 for ki in range(1,49):
     for kj in range(1,24):
         if ki in [25, 26] and kj in range(1, 12) or ki in [25, 26] and kj in range(13, 24):
@@ -126,15 +137,25 @@ for ki in range(1,49):
             Policy3[ki, kj] = np.argmax(np.array([q_value[(ki,kj)][0], q_value[(ki,kj)][1], q_value[(ki,kj)][2], q_value[(ki,kj)][3]]))
             Value[ki, kj] = max(q_value[(ki, kj)][0], q_value[(ki, kj)][1], q_value[(ki, kj)][2], q_value[(ki, kj)][3])
 
-plt.imshow(Value.T)
+plt.imshow(Value.T, cmap='gray')
 plt.title("Value function after {} episodes. [gamma = {}, eps={}, alpha={}]".format(episodes, gamma, eps, alpha))
-plt.show()
+if savefig:
+    plt.savefig(os.path.join(outdir, f"Value_{episodes}_{gamma}_{eps}_{alpha}.png"), dpi=300)
 
-plot_policy2(Policy3.T, Value.T, grid=False, title="Policy plot after {} episodes. [gamma = {}, eps={}, alpha={}]".format(episodes, gamma, eps, alpha))
+if plot:
+    plt.show()
 
+plot_policy2(Policy3.T, Value.T, grid=False, title="Policy plot after {} episodes. [gamma = {}, eps={}, alpha={}]".format(episodes, gamma, eps, alpha), outdir=os.path.join(outdir, f"Policy_{episodes}_{gamma}_{eps}_{alpha}.png"), plot = plot)
+
+plt.cla()
+plt.clf()
 plt.plot(reward_history)
 plt.title("Reward History for {} episodes. [gamma = {}, eps={}, alpha={}]".format(episodes, gamma, eps, alpha))
-plt.show()
+plt.xlim([-100,4000])
+if savefig:
+    plt.savefig(os.path.join(outdir, f"Reward_{episodes}_{gamma}_{eps}_{alpha}.png"), dpi=300)
+if plot:
+    plt.show()
 
 states, actions, rewards = simulate_policy((1, 1), Policy3, iter=2000)
-plot_simulation(states, actions)
+plot_simulation(states, actions, outdir=os.path.join(outdir, f"Sim_{episodes}_{gamma}_{eps}_{alpha}.png"), plot=plot)
