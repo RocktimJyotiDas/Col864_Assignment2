@@ -18,7 +18,7 @@ def Environment_interaction_next_state_reward(s_t, action, goal_state):
     elif actions[action] == "east":
         actual_action = np.random.choice([0, 1, 2, 3], p=[np.float(0.2 / 3), np.float(0.2 / 3), 0.8, np.float(0.2 / 3)])
     elif actions[action] == "west":
-        actual_action = np.random.choice([0, 1, 2, 3], p=[np.float(0.2 / 3), np.float(0.2 / 3), 0.8, np.float(0.2 / 3)])
+        actual_action = np.random.choice([0, 1, 2, 3], p=[np.float(0.2 / 3), np.float(0.2 / 3),np.float(0.2 / 3), 0.8])
 
     next_state = None
     if actual_action == 0:
