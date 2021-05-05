@@ -16,7 +16,7 @@ def Environment_interaction_next_state_reward(s_t, action, goal_state):
     #once the goal state is reached  the navigator stays at the goal state and return 0 reward
     if x_t == goal_state[0] and y_t == goal_state[1]:
         return (goal_state[0],goal_state[1]), 0
-    actual_action = -1
+
     if actions[action] == "north":
         actual_action = np.random.choice([0,1,2,3], p = [0.8, np.float(0.2/3), np.float(0.2/3), np.float(0.2/3)])
     elif actions[action] == "south":
@@ -25,7 +25,8 @@ def Environment_interaction_next_state_reward(s_t, action, goal_state):
         actual_action = np.random.choice([0, 1, 2, 3], p=[np.float(0.2 / 3), np.float(0.2 / 3), 0.8, np.float(0.2 / 3)])
     elif actions[action] == "west":
         actual_action = np.random.choice([0, 1, 2, 3], p=[np.float(0.2 / 3), np.float(0.2 / 3), np.float(0.2 / 3), 0.8])
-
+    else:
+        print(f"Your action is {action}, actions = {actions[action]}")
     next_state = None
     if actual_action == 0:
         next_state =(x_t, y_t + 1)
@@ -61,7 +62,7 @@ def epsilon_greedy(epsilon,Q_values):
         return np.random.choice([0,1,2,3] , p = [0.25, 0.25, 0.25,0.25])
 
 
-def Q_learning_algorithm(epsilon, alpha, gamma, goal_state, no_of_episodes):
+def Q_learning_algorithm(epsilon, alpha, gamma, goal_state, no_of_episodes, decrease=False):
     Q_value = {}
     reward_history = []
     
@@ -79,6 +80,8 @@ def Q_learning_algorithm(epsilon, alpha, gamma, goal_state, no_of_episodes):
                         #Q_value[(i,j)][k] = 0.0
 
     for i in tqdm(range(no_of_episodes)):
+        if(decrease and i%1000) == 999:
+            epsilon /= 2
         present_state = None
         while present_state == None:
             present_state= (random.randint(1,48),random.randint(1,23))
@@ -87,9 +90,9 @@ def Q_learning_algorithm(epsilon, alpha, gamma, goal_state, no_of_episodes):
         reward_this_episode = 0
         #print("Episode running")
         #print(i+1)
-        
+        curr_steps = 0
         while(True):
-
+            curr_steps +=1
             current_action = epsilon_greedy(epsilon, Q_value[present_state])
             next_state, reward = Environment_interaction_next_state_reward(present_state,current_action,goal_state)
             reward_this_episode += reward
@@ -98,7 +101,7 @@ def Q_learning_algorithm(epsilon, alpha, gamma, goal_state, no_of_episodes):
             increment_1 = values[np.argmax(values)]
             Q_value[present_state][current_action] = (1 - alpha)*Q_value[present_state][current_action] + alpha*(reward + gamma*increment_1)
             present_state = next_state
-            if present_state[0] == goal_state[0] and present_state[1] == goal_state[1]:
+            if (present_state[0] == goal_state[0] and present_state[1] == goal_state[1]) or curr_steps >= 1000:
                 break
         reward_history.append(reward_this_episode)
     
@@ -112,7 +115,7 @@ parser.add_argument('-g', '--gamma', help='discount factor', type=float, default
 parser.add_argument('-s', '--savefigs', help='save figures', action='store_true')
 parser.add_argument('--silent', help='dont show digures', action='store_true')
 parser.add_argument('-o', '--outdir', help='output directory', default='./pics/q2')
-
+parser.add_argument('-d', '--decrease', help='decrease eps with time', action='store_true')
 args = parser.parse_args()
 eps = args.eps
 episodes = args.episodes
@@ -121,10 +124,11 @@ gamma = args.gamma
 savefig = args.savefigs
 outdir = os.path.abspath(args.outdir)
 plot = not args.silent
+decrease = args.decrease
 
-print(f'savefigs = {savefig}, outdir={outdir}, plotfigs={plot}')
+print(f'savefigs = {savefig}, outdir={outdir}, plotfigs={plot} decrease={decrease}')
 
-q_value, reward_history = Q_learning_algorithm(eps, alpha, gamma, (48,12), episodes)
+q_value, reward_history = Q_learning_algorithm(eps, alpha, gamma, (48,12), episodes, decrease=decrease)
 Policy3 = np.zeros((50,25))
 Value = np.zeros((50, 25))
 
@@ -157,5 +161,5 @@ if savefig:
 if plot:
     plt.show()
 
-states, actions, rewards = simulate_policy((1, 1), Policy3, iter=2000)
-plot_simulation(states, actions, outdir=os.path.join(outdir, f"Sim_{episodes}_{gamma}_{eps}_{alpha}.png"), plot=plot)
+states, a, rewards = simulate_policy((1, 1), Policy3, iter=2000)
+plot_simulation(states, a, outdir=os.path.join(outdir, f"Sim_{episodes}_{gamma}_{eps}_{alpha}.png"), plot=plot)
